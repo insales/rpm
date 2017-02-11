@@ -95,7 +95,7 @@ DependencyDetection.defer do
     require 'new_relic/agent/instrumentation/active_record_helper'
 
     if defined?(::Rails) && ::Rails::VERSION::MAJOR.to_i == 3
-      ActiveSupport.on_load(:active_record) do
+      Rails.configuration.after_initialize do
         ::NewRelic::Agent::Instrumentation::ActiveRecord.insert_instrumentation
       end
     else
